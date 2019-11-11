@@ -6,7 +6,7 @@ ENV CONDA_PATH ${CONDA_INSTALL_PATH}/bin/conda
 
 RUN apt update && \
     apt install -y \
-        curl && \
+        curl \
         wget \
         && \
     apt clean
