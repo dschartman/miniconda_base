@@ -4,12 +4,15 @@ FROM debian:buster-slim as base
 ENV CONDA_INSTALL_PATH /opt/conda
 ENV CONDA_PATH ${CONDA_INSTALL_PATH}/bin/conda
 
+RUN apt update && \
+    apt install -y \
+        curl && \
+        wget \
+        && \
+    apt clean
+
 #############################################
 FROM base as staging
-
-RUN apt update
-
-RUN apt install -y wget
 
 ENV MINICONA_INSTALL_FILE Miniconda3-latest-Linux-x86_64.sh
 RUN wget https://repo.anaconda.com/miniconda/${MINICONA_INSTALL_FILE}
