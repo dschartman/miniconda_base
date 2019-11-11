@@ -17,10 +17,11 @@ RUN bash ${MINICONA_INSTALL_FILE} -b -p ${CONDA_INSTALL_PATH}
 RUN ${CONDA_PATH} update conda -y
 RUN ${CONDA_PATH} install -y conda-build conda-verify
 RUN ${CONDA_PATH} clean -afy
-RUN ${CONDA_PATH} init
 RUN find ${CONDA_INSTALL_PATH} -follow -type f -name '*.a' -delete  && \
     find ${CONDA_INSTALL_PATH} -follow -type f -name '*.pyc' -delete && \
     find ${CONDA_INSTALL_PATH} -follow -type f -name '*.js.map' -delete
+RUN echo ". ${CONDA_INSTALL_PATH}/etc/profile.d/conda.sh" >> /root/.bashrc && \
+    echo "conda activate base" >> /root/.bashrc
 
 #############################################
 FROM base
